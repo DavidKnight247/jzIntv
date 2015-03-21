@@ -1,3 +1,18 @@
+jzIntv port to the GCW0 handheld console.
+
+Original author: Joe Zbiciak
+Port author: David Knight
+
+COMPILE INSTRUCTIONS
+
+You must have the GCW0 toolchain installed, see http://www.gcw-zero.com/develop
+
+./gcw0buildscript.sh
+
+David Knight
+
+Original readme follows:
+
 ============================================================================
  jzIntv  -- Joe Zbiciak's Intellivision(TM) Emulator for Linux
 ============================================================================
