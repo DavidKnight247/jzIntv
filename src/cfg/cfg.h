@@ -152,8 +152,11 @@ int cfg_setbind(cfg_t *cfg, const char *kbdhackfile);
 /* ======================================================================== */
 /*  CFG_INIT     -- Parse command line and get started                      */
 /* ======================================================================== */
+#ifdef GCWZERO
+int cfg_init(cfg_t *cfg, int argc, char * argv[]);
+#else
 void cfg_init(cfg_t *cfg, int argc, char * argv[]);
-
+#endif
 /* ======================================================================== */
 /*  CFG_DTOR     -- Destroy a constructed Intellivision                     */
 /* ======================================================================== */

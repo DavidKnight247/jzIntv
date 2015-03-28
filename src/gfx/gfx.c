@@ -700,6 +700,48 @@ int gfx_set_title(gfx_t *gfx, const char *title)
 LOCAL double bm_max = 0, bm_min = 1e30, bm_tot = 0;
 LOCAL int bm_cnt = 0;
 #endif
+
+
+//TESTING
+#ifdef GCWZERO
+int gcw0_showerror(int number)
+{
+    SDL_Init( SDL_INIT_EVERYTHING ); 
+    SDL_Surface *screen;
+    SDL_ShowCursor(0);
+    screen = SDL_SetVideoMode( 320, 240, 32, SDL_SWSURFACE );
+    TTF_Init();
+    TTF_Font *ttffont = NULL;
+    SDL_Color text_color = {255, 0, 0};
+    ttffont = TTF_OpenFont("./ProggyTiny.ttf", 16);
+    SDL_Surface *textSurface;
+    if (number == 2)
+        textSurface = TTF_RenderText_Solid(ttffont, "exec.bin not found. ", text_color);
+    else
+    if (number == 3)
+        textSurface = TTF_RenderText_Solid(ttffont, "exec2.bin not found.", text_color);
+    else
+    if (number == 4)
+        textSurface = TTF_RenderText_Solid(ttffont, "grom.bin not found.", text_color);
+    SDL_Rect destination;
+    destination.x = 10;
+    destination.y = 10;
+    destination.w = 310; 
+    destination.h = 50;
+    SDL_BlitSurface(textSurface, NULL, screen, &destination);
+    textSurface = TTF_RenderText_Solid(ttffont, "Place in $HOME/.jzintellivision/bios/", text_color);
+    destination.y = 30;
+    SDL_BlitSurface(textSurface, NULL, screen, &destination);
+    SDL_FreeSurface(textSurface);
+    TTF_CloseFont (ttffont);
+    SDL_Flip(screen);
+    SDL_Delay(5000);
+    exit(1);
+}
+#endif
+
+
+
 /* ======================================================================== */
 /*  GFX_TICK_COMMON  -- Services a gfx_t tick                               */
 /* ======================================================================== */

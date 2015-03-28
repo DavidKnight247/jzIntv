@@ -83,6 +83,9 @@ int      gfx_init        (gfx_t   *gfx, int x, int y, int bpp,
 uint_32  gfx_tick_common (periph_p gfx, uint_32 len);
 void     gfx_vid_enable  (gfx_t   *gfx, int enabled);
 
+#ifdef GCWZERO
+int gcw0_showerror(int number);
+#endif
 /*
  * ============================================================================
  *  GFX_SET_BORD     -- Set the border / offset parameters for the display

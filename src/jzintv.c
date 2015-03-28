@@ -349,7 +349,27 @@ mkdir("/media/home/.jzintellivision/configfiles",S_IRWXU);
 #ifdef USE_AS_BACKEND
 	optind=0;
 #endif
+#ifdef GCWZERO
+    static int gcw0_noexec;
+    static int gcw0_noexec2;
+    static int gcw0_nogrom;
+    int cfg_outcome = cfg_init(&intv, argc, argv);
+    if (cfg_outcome == 2)
+    {
+        gcw0_showerror(2);
+    }
+    if (cfg_outcome == 3)
+    {
+        gcw0_showerror(3);
+    }
+    if (cfg_outcome == 4)
+    {
+        gcw0_showerror(4);
+    }
+#else
     cfg_init(&intv, argc, argv);
+#endif
+
     init_disp_width(0);
     jzp_flush();
 

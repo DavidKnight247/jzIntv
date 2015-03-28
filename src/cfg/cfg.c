@@ -457,7 +457,11 @@ LOCAL char *joy_cfg[MAX_JOY];
 /* ======================================================================== */
 /*  CFG_INIT     -- Parse command line and get started                      */
 /* ======================================================================== */
+#ifdef GCWZERO
+int cfg_init(cfg_t *cfg, int argc, char * argv[])
+#else
 void cfg_init(cfg_t *cfg, int argc, char * argv[])
+#endif
 {
     int c, option_idx = 0, rx, ry, rd;
     int exec_type = 0, legacy_rom = 0; 
@@ -868,11 +872,16 @@ void cfg_init(cfg_t *cfg, int argc, char * argv[])
     exec_type = 0;
     if (!f || file_read_rom16(f, 4096, cfg->exec_img) != 4096)
     {
+#ifdef GCWZERO
+        jzp_printf("\nNo exec image found\n");
+        return 2;
+#else
         if (errno) perror("file_read_rom16");
         fprintf(stderr, "ERROR:  Could not read EXEC image '%s'\n",
                 cfg->fn_exec);
         dump_search_path(rom_path);
         exit(1);
+#endif
     }
     lzoe_fseek(f, 0, SEEK_END);
     if (lzoe_ftell(f) == 2 * (4096 + 256))
@@ -881,10 +890,15 @@ void cfg_init(cfg_t *cfg, int argc, char * argv[])
         lzoe_fseek(f, 8192, SEEK_SET);
         if (file_read_rom16(f, 256, cfg->exec_img + 4096) != 256)
         {
+#ifdef GCWZERO
+            jzp_printf("\nNo exec2 image found\n");
+            return 3;
+#else
             if (errno) perror("file_read_rom16");
             fprintf(stderr, "ERROR:  Could not read EXEC2 image '%s'\n",
                     cfg->fn_exec);
             exit(1);
+#endif
         }
     }
     lzoe_fclose(f);
@@ -892,11 +906,16 @@ void cfg_init(cfg_t *cfg, int argc, char * argv[])
     f = path_fopen(rom_path, cfg->fn_grom, "rb");
     if (!f || file_read_rom8 (f, 2048, cfg->grom_img) != 2048)
     {
+#ifdef GCWZERO
+        jzp_printf("\nNo grom image found\n");
+        return 4;
+#else
         if (errno) perror("file_read_rom8");
         fprintf(stderr, "ERROR:  Could not read GROM image '%s'\n",
                 cfg->fn_grom);
         dump_search_path(rom_path);
         exit(1);
+#endif
     }
     lzoe_fclose(f);
 
@@ -929,8 +948,13 @@ cfgreset:
 
     if (tmp == NULL)
     {
+#ifdef GCWZERO
+;
+//        return;
+#else
         fprintf(stderr, "ERROR:  Failed to initialize game\n");
         exit(1);
+#endif
     }
     CONDFREE(cfg->fn_game);
     cfg->fn_game = tmp;
@@ -1391,7 +1415,7 @@ locutus_loaded:
     CONDFREE(debug_symtbl);
     CONDFREE(debug_srcmap);
     CONDFREE(elfi_prefix); 
-    return;
+    return 1;
 }
 
 /* ======================================================================== */
