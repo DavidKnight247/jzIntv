@@ -31,7 +31,6 @@
 #include "gfx_scale.h"
 //#include "file/file.h"
 #include "mvi/mvi.h"
-#include "gif/gif_enc.h"
 #include "lzoe/lzoe.h"
 #include "file/file.h"
 
