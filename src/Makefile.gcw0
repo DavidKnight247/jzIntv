@@ -52,8 +52,8 @@ LFLAGS   = -L$(GCW_PATH)/lib \
 
 
 OBJS=jzintv.o
-PROG=$(B)/jzintv$
-TOCLEAN=$(B)/jzintv$ core
+PROG=$(B)/jzintv
+TOCLEAN=$(B)/jzintv core
 
 PROGS=$(PROG)
 

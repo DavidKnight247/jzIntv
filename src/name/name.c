@@ -28,7 +28,7 @@ if (!resetflag) {
 	    strcpy(overlay, name_list[i].name);
 	    strcat(pngextension, ".png");
 //	    strcat(pathtopng, "./overlays/");
-	    strcat(pathtopng, "/media/home/.jzintellivision/overlays/");
+	    strcat(pathtopng, "/media/data/local/home/.jzintellivision/overlays/");
 	    strcat(overlay, pngextension);
 	    strcat(pathtopng, overlay);
 	    strcpy(overlay, pathtopng);
@@ -99,7 +99,7 @@ if (!resetflag) {
 // read rom path
 			char configfilecontents[999];
 			FILE *file;
-			file=fopen("/media/home/.jzintellivision/.filename","r");
+			file=fopen("/media/data/local/home/.jzintellivision/.filename","r");
 			if( fgets (configfilecontents, 999, file)!=NULL ) {
 			}else jzp_printf("fgets didn't work, FILE EMPTY");
 			fclose(file);
